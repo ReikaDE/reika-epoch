@@ -1,0 +1,14 @@
+# SPDX-FileCopyrightText: 2026 ReikaDE contributors
+# SPDX-License-Identifier: MIT
+#
+# Reusable workflow: every file has license and copyright information.
+name: REUSE
+on:
+  workflow_call:
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: fsfe/reuse-action@v5

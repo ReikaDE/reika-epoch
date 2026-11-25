@@ -1,0 +1,11 @@
+name: CI
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  dotnet:
+    uses: ReikaDE/reika-epoch/.github/workflows/dotnet.yml@main
+  reuse:
+    uses: ReikaDE/reika-epoch/.github/workflows/reuse.yml@main

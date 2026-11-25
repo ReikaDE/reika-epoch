@@ -1,0 +1,51 @@
+# SPDX-FileCopyrightText: 2026 ReikaDE contributors
+# SPDX-License-Identifier: MIT
+#
+# Reusable workflow for .NET components: builds ReikaDE.Avalonia.Wayland at
+# the pinned fork revision into a local feed, then builds with warnings
+# (including trimming and AOT warnings) as errors, tests, and checks pins.
+name: .NET
+on:
+  workflow_call:
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    container: archlinux:base-devel
+    env:
+      REIKA_FEED: ${{ github.workspace }}/.reika-feed
+      DOTNET_CLI_TELEMETRY_OPTOUT: "1"
+    steps:
+      - name: System packages
+        run: pacman -Syu --noconfirm --needed git just dotnet-sdk
+      - uses: actions/checkout@v5
+      - uses: actions/checkout@v5
+        with:
+          repository: ReikaDE/reika-epoch
+          path: .reika-epoch
+      - name: Read pins
+        run: grep -v '^#' .reika-epoch/pins.env | grep . >> "$GITHUB_ENV"
+      - uses: actions/cache@v4
+        id: feed
+        with:
+          path: .reika-feed
+          key: reika-feed-${{ env.AVALONIA_FORK_REV }}
+      - uses: actions/checkout@v5
+        if: steps.feed.outputs.cache-hit != 'true'
+        with:
+          repository: ReikaDE/Avalonia
+          ref: ${{ env.AVALONIA_FORK_REV }}
+          path: .avalonia
+      - name: Build ReikaDE.Avalonia.Wayland
+        if: steps.feed.outputs.cache-hit != 'true'
+        run: just --justfile .avalonia/reika/justfile --working-directory .avalonia/reika install
+      - name: Format
+        run: dotnet format --verify-no-changes
+      - name: Build
+        run: dotnet build -c Release -nologo -p:TreatWarningsAsErrors=true
+      - name: Tests
+        run: dotnet test -c Release -nologo --no-build
+      - name: Pins
+        run: |
+          mkdir -p /tmp/root && ln -s "$GITHUB_WORKSPACE" "/tmp/root/${GITHUB_REPOSITORY#*/}"
+          .reika-epoch/scripts/check-pins.sh /tmp/root

@@ -1,0 +1,25 @@
+# SPDX-FileCopyrightText: @YEAR@ ReikaDE contributors
+# SPDX-License-Identifier: @LICENSE@
+
+prefix := env("PREFIX", "/usr/local")
+destdir := env("DESTDIR", "")
+profile := "release"
+
+default:
+    @just --list
+
+build:
+    cargo build --profile {{profile}} --locked
+
+test:
+    cargo test --locked
+
+run *args:
+    cargo run -- {{args}}
+
+lint:
+    cargo fmt --all -- --check
+    cargo clippy --locked --all-targets -- -D warnings
+
+install: build
+    install -Dm755 target/{{profile}}/@NAME@ "{{destdir}}{{prefix}}/bin/@NAME@"

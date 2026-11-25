@@ -1,0 +1,22 @@
+# SPDX-FileCopyrightText: @YEAR@ ReikaDE contributors
+# SPDX-License-Identifier: @LICENSE@
+
+prefix := env("PREFIX", "/usr/local")
+destdir := env("DESTDIR", "")
+
+default:
+    @just --list
+
+# Generates installable files (for example rendered icons) into build/.
+build:
+    mkdir -p build
+
+test: build
+
+lint:
+    reuse lint
+
+# Installs build/ into $DESTDIR$PREFIX/share/@NAME@; adjust to the XDG location the assets belong in.
+install: build
+    mkdir -p "{{destdir}}{{prefix}}/share/@NAME@"
+    cp -R build/. "{{destdir}}{{prefix}}/share/@NAME@/"

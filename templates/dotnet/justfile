@@ -1,0 +1,29 @@
+# SPDX-FileCopyrightText: @YEAR@ ReikaDE contributors
+# SPDX-License-Identifier: @LICENSE@
+
+configuration := "Release"
+prefix := env("PREFIX", "/usr/local")
+destdir := env("DESTDIR", "")
+export REIKA_FEED := env("REIKA_FEED", justfile_directory() / "../Avalonia/artifacts/reika-feed")
+
+default:
+    @just --list
+
+build:
+    dotnet build -c {{configuration}} -nologo
+
+test:
+    dotnet test -c {{configuration}} -nologo
+
+run project *args:
+    dotnet run --project src/{{project}} -- {{args}}
+
+# CI treats every warning as an error, including trimming and AOT warnings.
+lint:
+    dotnet format --verify-no-changes
+    dotnet build -c {{configuration}} -nologo -p:TreatWarningsAsErrors=true
+
+# NativeAOT publish of one application project into $DESTDIR$PREFIX/lib/@NAME@.
+install project:
+    dotnet publish src/{{project}} -c {{configuration}} -nologo -r linux-x64 -p:PublishAot=true \
+        -o "{{destdir}}{{prefix}}/lib/@NAME@"

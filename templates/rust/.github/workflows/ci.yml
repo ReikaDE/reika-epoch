@@ -1,0 +1,11 @@
+name: CI
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  rust:
+    uses: ReikaDE/reika-epoch/.github/workflows/rust.yml@main
+  reuse:
+    uses: ReikaDE/reika-epoch/.github/workflows/reuse.yml@main

@@ -1,0 +1,24 @@
+# SPDX-FileCopyrightText: 2026 ReikaDE contributors
+# SPDX-License-Identifier: MIT
+name: CI
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  scripts:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - name: ShellCheck
+        run: shellcheck -x scripts/*.sh
+      - name: Templates create buildable repositories
+        run: |
+          sudo apt-get install -y just
+          mkdir -p /tmp/root
+          scripts/new-repo.sh /tmp/root reika-sample-rust rust GPL-3.0-or-later
+          scripts/new-repo.sh /tmp/root reika-sample-assets assets CC-BY-NC-4.0
+          (cd /tmp/root/reika-sample-rust && just build && just lint)
+  reuse:
+    uses: ./.github/workflows/reuse.yml

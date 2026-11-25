@@ -1,0 +1,17 @@
+<Project>
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <LangVersion>latest</LangVersion>
+    <!-- Shipped builds are NativeAOT: keep trimming and AOT analyzers on from the start. -->
+    <IsAotCompatible>true</IsAotCompatible>
+    <IsTrimmable>true</IsTrimmable>
+    <EnableTrimAnalyzer>true</EnableTrimAnalyzer>
+    <EnableAotAnalyzer>true</EnableAotAnalyzer>
+    <AvaloniaUseCompiledBindingsByDefault>true</AvaloniaUseCompiledBindingsByDefault>
+    <Authors>ReikaDE contributors</Authors>
+    <PackageLicenseExpression>@LICENSE@</PackageLicenseExpression>
+    <RepositoryUrl>https://github.com/ReikaDE/@NAME@</RepositoryUrl>
+  </PropertyGroup>
+</Project>

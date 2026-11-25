@@ -1,0 +1,18 @@
+<Project>
+  <!-- Versions match reika-epoch/pins.env; `just check-pins` there verifies them. -->
+  <PropertyGroup>
+    <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
+    <AvaloniaVersion>@AVALONIA_VERSION@</AvaloniaVersion>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageVersion Include="Avalonia" Version="@AVALONIA_VERSION@" />
+    <PackageVersion Include="Avalonia.Skia" Version="@AVALONIA_VERSION@" />
+    <PackageVersion Include="Avalonia.HarfBuzz" Version="@AVALONIA_VERSION@" />
+    <!-- Replaces Avalonia.Wayland (and Avalonia.Desktop); built from ReikaDE/Avalonia. -->
+    <PackageVersion Include="ReikaDE.Avalonia.Wayland" Version="@AVALONIA_WAYLAND_VERSION@" />
+    <PackageVersion Include="NWayland" Version="@NWAYLAND_VERSION@" />
+    <PackageVersion Include="NWayland.Generator" Version="@NWAYLAND_VERSION@" />
+    <PackageVersion Include="Tmds.DBus.Protocol" Version="@TMDS_DBUS_VERSION@" />
+    <PackageVersion Include="Tmds.DBus.Generator" Version="@TMDS_DBUS_VERSION@" />
+  </ItemGroup>
+</Project>

@@ -1,0 +1,24 @@
+version = 1
+
+# Configuration and metadata files that cannot carry comments, or where a
+# header would be noise.
+[[annotations]]
+path = ["*.json", "*.toml", "*.lock", ".gitignore", ".editorconfig", "*.props", "*.slnx", "*.md", ".github/**"]
+precedence = "aggregate"
+SPDX-FileCopyrightText = "2026 ReikaDE contributors"
+SPDX-License-Identifier = "CC0-1.0"
+
+# Templates carry placeholders in their headers; the generated repositories
+# get real ones. templates/licenses holds the license texts copied into new
+# repositories' LICENSES/ (kept out of this repository's own LICENSES/, since
+# nothing here is under GPL-3.0-or-later or CC-BY-NC-4.0).
+[[annotations]]
+path = "templates/**"
+precedence = "override"
+SPDX-FileCopyrightText = "2026 ReikaDE contributors"
+SPDX-License-Identifier = "MIT"
+
+[[annotations]]
+path = "components.list"
+SPDX-FileCopyrightText = "2026 ReikaDE contributors"
+SPDX-License-Identifier = "MIT"

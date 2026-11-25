@@ -1,0 +1,28 @@
+[workspace]
+resolver = "3"
+members = ["."]
+
+[workspace.package]
+edition = "2024"
+license = "@LICENSE@"
+repository = "https://github.com/ReikaDE/@NAME@"
+
+[workspace.dependencies]
+# Every crate uses ReikaDE/smithay at the revision in reika-epoch/pins.env.
+# Uncomment when the component needs Smithay; `just check-pins` verifies it.
+# smithay = { git = "@SMITHAY_GIT@", rev = "@SMITHAY_REV@", default-features = false }
+
+[package]
+name = "@NAME@"
+version = "0.1.0"
+edition.workspace = true
+license.workspace = true
+repository.workspace = true
+
+[dependencies]
+
+[lints.rust]
+unsafe_op_in_unsafe_fn = "deny"
+
+[lints.clippy]
+all = { level = "warn", priority = -1 }

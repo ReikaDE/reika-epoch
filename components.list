@@ -1,0 +1,26 @@
+# SPDX-FileCopyrightText: 2026 ReikaDE contributors
+# SPDX-License-Identifier: MIT
+#
+# Reika DE components. Columns: repository, template kind, license, phase.
+# Repositories are checked out next to reika-epoch (see README.md).
+reika-comp               rust    GPL-3.0-or-later  1
+reika-protocols          assets  MIT               1
+reika-toolkit            dotnet  MIT               1
+reika-theme              assets  MIT               1
+reika-session            rust    GPL-3.0-or-later  2
+reika-shell              dotnet  GPL-3.0-or-later  2
+reika-settings           dotnet  GPL-3.0-or-later  2
+reika-icons              assets  CC-BY-NC-4.0      2
+reika-cursors            assets  CC-BY-NC-4.0      2
+reika-wallpapers         assets  CC-BY-NC-4.0      2
+reika-sounds             assets  CC-BY-NC-4.0      2
+reika-gtk-theme          assets  MIT               3
+xdg-desktop-portal-reika rust    GPL-3.0-or-later  3
+reika-greeter            rust    GPL-3.0-or-later  4
+reika-files              dotnet  GPL-3.0-or-later  4
+reika-term               dotnet  GPL-3.0-or-later  4
+reika-edit               dotnet  GPL-3.0-or-later  4
+reika-viewer             dotnet  GPL-3.0-or-later  4
+# Forks, kept under their upstream names; not created from templates.
+smithay                  fork    MIT               0
+Avalonia                 fork    MIT               0
