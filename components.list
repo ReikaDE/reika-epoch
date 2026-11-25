@@ -7,6 +7,7 @@ reika-comp               rust    GPL-3.0-or-later  1
 reika-protocols          assets  MIT               1
 reika-toolkit            dotnet  MIT               1
 reika-theme              assets  MIT               1
+reika-fonts              assets  MIT               1
 reika-session            rust    GPL-3.0-or-later  2
 reika-shell              dotnet  GPL-3.0-or-later  2
 reika-settings           dotnet  GPL-3.0-or-later  2
